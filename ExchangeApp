@@ -50,6 +50,7 @@ vector<Book> LotusBuy;
 vector<Book> TulipBuy;
 vector<Book> OrchidBuy;
     
+
 string getCurrentTransactionTime() {
     // Function to get current time in the format of YYYYMMDD-HHMMSS.mmm
     auto now = chrono::system_clock::now();
@@ -61,27 +62,33 @@ string getCurrentTransactionTime() {
     return oss.str();
 }
 
-void AddToBook(vector<Book>& BookToAdd, Book flower){
-    // Function to add order to the relevent side of the book in relevent order according to the price
+
+
+
+void AddToBook(vector<Book>& BookToAdd, Book flower) {
+    // Function to add order to the relevant side of the book in the relevant order according to the price
     int n = BookToAdd.size();
-    if (n==0){
+    if (n == 0) {
         BookToAdd.push_back(flower);
-    }
-    else{
-        BookToAdd.push_back(flower);
-        for (int j=n-1;j>=0;j--){
-            if (BookToAdd[j].Price>=flower.Price){
-                BookToAdd[j+1]=flower;
-            }else{
-                BookToAdd[j+1]=BookToAdd[j];
-                if (j==0){
-                    BookToAdd[j]=flower;
-                }
+    } else {
+        int left = 0;
+        int right = n - 1;
+        int insertionPoint = n; // Initialize to n in case the element is greater than all existing elements
+        int mid = left + (right - left) / 2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (BookToAdd[mid].Price >= flower.Price) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
             }
         }
+        insertionPoint = mid;
+        BookToAdd.insert(BookToAdd.begin() + insertionPoint, flower);
+
     }
- 
 }
+
 
 void MakeBook(int side, ExecutionReport& report, vector<ExecutionReport>& reports, Book flower, vector<Book>& SideToAdd, vector<Book>& OtherSide){
     // Function to make book for each flower type
