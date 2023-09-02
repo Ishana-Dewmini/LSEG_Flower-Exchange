@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <iomanip>
 #include "ExecutionReport.h"
 
 using namespace std;
@@ -27,7 +28,7 @@ void Output(const vector<ExecutionReport>& reports, const string& filename) {
              << report.Side << ","
              << report.Status << ","
              << report.Quantity << ","
-             << report.Price << ","
+             << std::fixed << std::setprecision(2) << report.Price << ","
              << report.Reason << ","
              << report.TransactionTime << std::endl;
     }
