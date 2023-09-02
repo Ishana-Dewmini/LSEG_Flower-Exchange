@@ -1,5 +1,5 @@
-#ifndef PROCESS_H
-#define PROCESS_H
+#ifndef EXCHANGEAPP_H
+#define EXCHANGEAPP_H
 
 #include "Order.h"
 #include "ExecutionReport.h"
@@ -24,7 +24,7 @@ vector<Book> TulipBuy;
 vector<Book> OrchidBuy;
     
 
-void Process(vector<Order>& orders, vector<ExecutionReport>& reports) {
+void ExchangeApp(vector<Order>& orders, vector<ExecutionReport>& reports) {
     // Function to process and execute orders to generate Execution Reports
 
     int orderid = 0;
@@ -138,4 +138,4 @@ void Process(vector<Order>& orders, vector<ExecutionReport>& reports) {
     }
 }
 
-#endif // PROCESS_H
+#endif // EXCHANGEAPP_H

@@ -12,7 +12,7 @@
 using namespace std;
 
 
-vector<Order> ReadOder(const string& filename) {
+vector<Order> ReadOrder(const string& filename) {
     // Function to read orders from CSV file
     std::ifstream file;
     file.open(filename);
