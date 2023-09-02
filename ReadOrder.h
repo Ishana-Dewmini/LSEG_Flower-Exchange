@@ -1,14 +1,9 @@
 #ifndef READORDER_H
 #define READORDER_H
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include <vector>
 #include <string>
-
 #include "Order.h"
-
 using namespace std;
 
 

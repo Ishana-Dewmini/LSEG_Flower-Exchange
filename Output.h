@@ -1,12 +1,8 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include <vector>
 #include <string>
-
 #include "ExecutionReport.h"
 
 using namespace std;
