@@ -3,6 +3,7 @@
 
 #include <string>
 
+// Order structure
 struct Order {
     std::string ClientOderID;
     std::string Instrument;

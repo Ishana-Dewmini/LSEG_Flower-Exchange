@@ -3,6 +3,7 @@
 
 #include <string>
 
+// Execution Report structure
 struct ExecutionReport {
     std::string ClientOderID;
     std::string OderID;

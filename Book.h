@@ -3,6 +3,8 @@
 
 #include <string>
 using namespace std;
+
+// Book structure
 struct Book {
     std::string OderID;
     int Quantity;

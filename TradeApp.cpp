@@ -28,6 +28,7 @@ int main() {
     // Write Execution Reports to the output CSV file
     string outputFilename = "execution_reports.csv";
     Output(reports, outputFilename);
+    cout << "Execution reports written to " << outputFilename << endl;
 
     return 0;
     
