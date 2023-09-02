@@ -7,38 +7,16 @@
 #include <chrono>
 #include <ctime>
 #include <iomanip>
+#include "Order.h"
+#include "ExecutionReport.h"
+#include "Book.h"
+#include "MakeBook.h"
+#include "AddToBook.h"
+#include "getCurrentTransactionTime.h"
+#include "Process.h"
 using namespace std;
 
-struct Order {
-    // Structure to store order details
-    string ClientOderID;
-    string Instrument;
-    int Side;
-    double Price;
-    int Quantity;
-};
-
-struct ExecutionReport {
-    // Structure to store execution report details
-    string ClientOderID;
-    string OderID;
-    string Instrument;
-    int Side;
-    double Price;
-    int Quantity;
-    int Status;
-    string Reason;
-    string TransactionTime;
-};
-
-struct Book{
-    // Structure to store order details in the book
-    string OderID;
-    int Quantity;
-    double Price;
-};
-
-vector<Book> RoseSell;
+/*vector<Book> RoseSell;
 vector<Book> LavenderSell;
 vector<Book> LotusSell;
 vector<Book> TulipSell;
@@ -48,10 +26,9 @@ vector<Book> RoseBuy;
 vector<Book> LavenderBuy;
 vector<Book> LotusBuy;
 vector<Book> TulipBuy;
-vector<Book> OrchidBuy;
+vector<Book> OrchidBuy;*/
     
-
-string getCurrentTransactionTime() {
+/*string getCurrentTransactionTime() {
     // Function to get current time in the format of YYYYMMDD-HHMMSS.mmm
     auto now = chrono::system_clock::now();
     time_t time = chrono::system_clock::to_time_t(now);
@@ -60,37 +37,32 @@ string getCurrentTransactionTime() {
     ostringstream oss;
     oss << put_time(std::localtime(&time), "%Y%m%d-%H%M%S") << "." << setfill('0') << setw(3) << milliseconds.count();
     return oss.str();
-}
+}*/
 
-
-
-
-void AddToBook(vector<Book>& BookToAdd, Book flower) {
-    // Function to add order to the relevant side of the book in the relevant order according to the price
+/*void AddToBook(vector<Book>& BookToAdd, Book flower){
+    // Function to add order to the relevent side of the book in relevent order according to the price
     int n = BookToAdd.size();
-    if (n == 0) {
+    if (n==0){
         BookToAdd.push_back(flower);
-    } else {
-        int left = 0;
-        int right = n - 1;
-        int insertionPoint = n; // Initialize to n in case the element is greater than all existing elements
-        int mid = left + (right - left) / 2;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (BookToAdd[mid].Price >= flower.Price) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
+    }
+    else{
+        BookToAdd.push_back(flower);
+        for (int j=n-1;j>=0;j--){
+            if (BookToAdd[j].Price>=flower.Price){
+                BookToAdd[j+1]=flower;
+            }else{
+                BookToAdd[j+1]=BookToAdd[j];
+                if (j==0){
+                    BookToAdd[j]=flower;
+                }
             }
         }
-        insertionPoint = mid;
-        BookToAdd.insert(BookToAdd.begin() + insertionPoint, flower);
-
     }
+ 
 }
+*/
 
-
-void MakeBook(int side, ExecutionReport& report, vector<ExecutionReport>& reports, Book flower, vector<Book>& SideToAdd, vector<Book>& OtherSide){
+/*void MakeBook(int side, ExecutionReport& report, vector<ExecutionReport>& reports, Book flower, vector<Book>& SideToAdd, vector<Book>& OtherSide){
     // Function to make book for each flower type
 
     if (OtherSide.size() == 0){
@@ -185,12 +157,13 @@ void MakeBook(int side, ExecutionReport& report, vector<ExecutionReport>& report
 
     
                 
-}
+}*/
 
 vector<Order> ReadOder(const string& filename) {
     // Function to read orders from CSV file
-
-    ifstream file(filename);
+    std::ifstream file;
+    file.open(filename);
+   
     if( !file.is_open()) {
         cout << "File "<< filename <<" not found." << endl;
         exit(-1);
@@ -229,7 +202,7 @@ vector<Order> ReadOder(const string& filename) {
     return orders;
 }
 
-void Process(vector<Order>& orders, vector<ExecutionReport>& reports) {
+/*void Process(vector<Order>& orders, vector<ExecutionReport>& reports) {
     // Function to process and execute orders to generate Execution Reports
 
     int orderid = 0;
@@ -341,7 +314,7 @@ void Process(vector<Order>& orders, vector<ExecutionReport>& reports) {
         } 
         
     }
-}
+}*/
 
 void Output(const vector<ExecutionReport>& reports, const string& filename) {
     // Function to write execution reports to CSV file
@@ -373,17 +346,20 @@ void Output(const vector<ExecutionReport>& reports, const string& filename) {
 }
 
 int main() {
-    
+    cout<<0;
     // Read orders from Trader Application's CSV file
     string inputFilename = "trader_orders.csv";
+    cout<<1;
     vector<Order> orders = ReadOder(inputFilename);
-    
+    cout<<2;
     // Process and execute orders to generate Execution Reports
     vector<ExecutionReport> reports;
+    cout<<3;
     Process(orders, reports);
-
+    cout<<4;
     // Write Execution Reports to the output CSV file
     string outputFilename = "execution_reports.csv";
+    cout<<5;
     Output(reports, outputFilename);
 
     return 0;
